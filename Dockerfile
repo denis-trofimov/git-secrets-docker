@@ -1,8 +1,12 @@
 FROM alpine:latest
 
-RUN apk add --no-cache bash
-RUN apk add --no-cache git make
-RUN git clone https://github.com/awslabs/git-secrets.git
-WORKDIR git-secrets
-RUN make install
-RUN git secrets --register-aws --global
+RUN apk --update add --no-cache bash git make
+
+RUN git clone https://github.com/awslabs/git-secrets.git && \
+    cd git-secrets && \
+    make install && \
+    git secrets --register-aws --global
+
+# Best Practices for Non-root User
+# ref: https://github.com/mhart/alpine-node/issues/48
+RUN addgroup -S app && adduser -S -G app app
