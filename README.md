@@ -24,8 +24,12 @@ stages:
   - secrets
 
 SecretsTest:
-  image: izhar0407/git-secrets:latest
+  image: ghcr.io/denis-trofimov/git-secrets-docker
   stage: secrets
   script:
     - git secrets --scan -r .
 ```
+
+## Acknowledgments
+
+To Izhar Ahmed @izharahmd for making the original work [izharahmd/git-secrets/](https://github.com/izharahmd/git-secrets/).
